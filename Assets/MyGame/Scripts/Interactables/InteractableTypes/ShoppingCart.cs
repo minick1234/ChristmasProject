@@ -18,14 +18,11 @@ public class ShoppingCart : Interactable
     //might as well use the eventhanlder one and have it just done for me and make the custom class to pass the correct params, and if im not passing params just use Eventargs.empty
     //its just more convienient even though the commented out way makes it so much faster in terms of passing info.
     
-
- //   public delegate void RandomDelegate(GameObject thing);
-   // public event RandomDelegate ShoppingCartInteracted_Event;
+     //  public delegate void RandomDelegate(GameObject thing);
+    //  public event RandomDelegate ShoppingCartInteracted_Event;
     
-     public event EventHandler<ShoppingCartInteractEventArgs> ShoppingCartInteracted_Event;
-
+    public event EventHandler<ShoppingCartInteractEventArgs> ShoppingCartInteracted_Event;
     private OurFirstPersonCharacter FPSCharacter;
-
     private FixedJoint shoppingCartFixedJoint;
     
     // Start is called before the first frame update
@@ -33,14 +30,8 @@ public class ShoppingCart : Interactable
     {
         FPSCharacter = GameObject.FindObjectOfType<OurFirstPersonCharacter>();
         shoppingCartFixedJoint = gameObject.GetComponent<FixedJoint>();
-        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-    
     public override void Interact()
     {
         ShoppingCartInteracted_Event +=
@@ -59,23 +50,11 @@ public class ShoppingCart : Interactable
         
         ShoppingCartInteracted_Event -=
             GameObject.FindObjectOfType<OurFirstPersonCharacter>().OnShoppingCartInteracted;
-
-        if (ShoppingCartInteracted_Event == null)
-        {
-            Debug.Log("I have emptied this event");
-        }
-       
-    }
-
-    public void EnableTheJoint()
-    {
-        
     }
 
     public void AttachPlayerToShoppingCartJoint()
     {
         Transform characterRoot = FPSCharacter.gameObject.transform.Find("Root");
-
         if (characterRoot != null)
         {
             gameObject.transform.parent = characterRoot;
@@ -98,10 +77,6 @@ public class ShoppingCart : Interactable
         ShoppingCartInteracted_Event +=
             FPSCharacter.OnShoppingCartInteracted;
 
-        //Assign the event params for the player object
-        ShoppingCartInteractEventArgs shoppingCartInteractEventArgs = new ShoppingCartInteractEventArgs();
-        shoppingCartInteractEventArgs.ShoppingCartObject = this.gameObject;
-
         //Check if the event is null or unsubscribed
         if (ShoppingCartInteracted_Event != null)
         {
@@ -112,7 +87,6 @@ public class ShoppingCart : Interactable
         //Unsubscribe from the event so it is then set as null and cannot be bothered again if this is raised somewhere else
         ShoppingCartInteracted_Event -=
             GameObject.FindObjectOfType<OurFirstPersonCharacter>().OnShoppingCartInteracted;
-
     }
     */
 

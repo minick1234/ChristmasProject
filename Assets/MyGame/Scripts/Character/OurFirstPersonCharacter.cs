@@ -511,7 +511,6 @@ namespace EasyCharacterMovement
         protected override void OnOnValidate()
         {
             // Validates Character fields
-
             base.OnOnValidate();
 
             // Validate this
@@ -531,7 +530,6 @@ namespace EasyCharacterMovement
         protected override void OnAwake()
         {
             // Call base method
-
             base.OnAwake();
 
             // Disable Character rotation
@@ -546,7 +544,6 @@ namespace EasyCharacterMovement
         protected override void OnLateUpdate()
         {
             // Is Character is disabled, return
-
             if (IsDisabled())
                 return;
 
@@ -572,18 +569,6 @@ namespace EasyCharacterMovement
         
         public void OnShoppingCartInteracted(object sender ,ShoppingCartInteractEventArgs e)
         {
-            ShoppingCart shoppingCart = null;
-            if (sender is ShoppingCart)
-            {
-                shoppingCart = (ShoppingCart)sender;
-            }
-
-            if (shoppingCart != null)
-            {
-                shoppingCart.SetNameOfInteractable("Some Random Bullshit");
-                Debug.Log("Changed the name of the interactable");
-            }
-            
             AttachShoppingCart(e.ShoppingCartObject);   
         }
         
@@ -601,9 +586,6 @@ namespace EasyCharacterMovement
 
         public void AttachShoppingCart(GameObject shoppingCartObject)
         {
-            Debug.Log("I am now attached as the cart");
-            Debug.Log("The name of the shopping cart object from the event is : " + shoppingCartObject.name);
-            shoppingCartObject.gameObject.transform.position = _shoppingCartAttachPoint.transform.position;
             shoppingCartObject.GetComponent<ShoppingCart>().AttachPlayerToShoppingCartJoint();
         }
 
@@ -617,7 +599,6 @@ namespace EasyCharacterMovement
             base.OnUpdate();
             Debug.DrawRay(eyePivot.position, eyePivot.forward * _interactionDistance, Color.red);
         }
-        
         
         #endregion
     }
